@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <main className="w-full relative bg-[#1a1d18]">
-      <Navbar />
+      {/* <Navbar /> */}
       <section>
         <HomeHero />
       </section>

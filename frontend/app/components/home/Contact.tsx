@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaFacebookF, FaEnvelope, FaPlus, FaInstagram } from 'react-icons/fa';
+import { useFetcher } from 'react-router';
 
 const colors = {
   bg: {
@@ -15,6 +16,9 @@ const colors = {
 };
 
 const ContactComponent = () => {
+  const fetcher = useFetcher();
+  const isSubmitting = fetcher.state === "submitting";
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,6 +27,22 @@ const ContactComponent = () => {
   });
 
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+
+  const isSuccess = fetcher.data?.success;
+  const isError = fetcher.data?.success === false;
+
+  useEffect(() => {
+    if (isSuccess) {
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+        interests: []
+      });
+      // Optional: Clear success message after a delay if needed, 
+      // but keeping it visible is fine or the user can just see the form cleared + button state.
+    }
+  }, [isSuccess]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -41,8 +61,16 @@ const ContactComponent = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Form submitted:', formData);
-    alert('Message sent successfully!');
+    // Map to the fields expected by contact.ts
+    const submissionData = {
+      nombre: formData.name,
+      correo: formData.email,
+      mensaje: formData.message,
+      interests: formData.interests.join(", "),
+      // honeypot field 'website' is empty by default
+    };
+
+    fetcher.submit(submissionData, { method: "post", action: "/contact" });
   };
 
   const faqItems = [
@@ -99,9 +127,8 @@ const ContactComponent = () => {
                     <FaPlus className={`transition-all duration-300 ease-in-out ${expandedFaq === index ? 'rotate-45' : 'rotate-0'}`} style={{ color: colors.text.muted }} />
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                      expandedFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${expandedFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                      }`}
                   >
                     <p className="pb-4 text-sm" style={{ color: colors.text.muted }}>{item.answer}</p>
                   </div>
@@ -134,6 +161,12 @@ const ContactComponent = () => {
 
             <div className="border-t pt-6" style={{ borderColor: `${colors.text.muted}30` }}>
               <p className="text-sm mb-4" style={{ color: colors.text.muted }}>Leave us a brief message</p>
+              {isError && (
+                <p className="text-red-400 text-sm mb-4">Error: {fetcher.data?.error || "Error sending message."}</p>
+              )}
+              {isSuccess && (
+                <p className="text-green-400 text-sm mb-4">Message sent successfully!</p>
+              )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
@@ -145,8 +178,8 @@ const ContactComponent = () => {
                     onChange={handleInputChange}
                     placeholder="Your name"
                     className="w-full border rounded-lg px-4 py-3 placeholder:opacity-60 focus:outline-none focus:border-opacity-60 transition-colors"
-                    style={{ 
-                      backgroundColor: colors.bg.tertiary, 
+                    style={{
+                      backgroundColor: colors.bg.tertiary,
                       borderColor: `${colors.text.muted}30`,
                       color: colors.text.primary
                     }}
@@ -169,8 +202,8 @@ const ContactComponent = () => {
                     onChange={handleInputChange}
                     placeholder="Email"
                     className="w-full border rounded-lg px-4 py-3 placeholder:opacity-60 focus:outline-none focus:border-opacity-60 transition-colors"
-                    style={{ 
-                      backgroundColor: colors.bg.tertiary, 
+                    style={{
+                      backgroundColor: colors.bg.tertiary,
                       borderColor: `${colors.text.muted}30`,
                       color: colors.text.primary
                     }}
@@ -195,8 +228,8 @@ const ContactComponent = () => {
                   placeholder="Briefly describe your project idea..."
                   rows={4}
                   className="w-full border rounded-lg px-4 py-3 placeholder:opacity-60 focus:outline-none focus:border-opacity-60 resize-none transition-colors"
-                  style={{ 
-                    backgroundColor: colors.bg.tertiary, 
+                  style={{
+                    backgroundColor: colors.bg.tertiary,
                     borderColor: `${colors.text.muted}30`,
                     color: colors.text.primary
                   }}
@@ -227,7 +260,7 @@ const ContactComponent = () => {
                         checked={formData.interests.includes(option.value)}
                         onChange={() => handleCheckboxChange(option.value)}
                         className="w-4 h-4 rounded accent-gray-700"
-                        style={{ 
+                        style={{
                           backgroundColor: colors.bg.tertiary,
                           borderColor: `${colors.text.muted}40`
                         }}
@@ -240,10 +273,11 @@ const ContactComponent = () => {
 
               <button
                 onClick={handleSubmit}
-                className="w-full font-semibold py-3 rounded-lg transition-colors hover:opacity-80"
+                disabled={isSubmitting}
+                className="w-full font-semibold py-3 rounded-lg transition-colors hover:opacity-80 disabled:opacity-50"
                 style={{ backgroundColor: colors.bg.tertiary, color: colors.text.primary }}
               >
-                Send a message
+                {isSubmitting ? "Sending..." : "Send a message"}
               </button>
             </div>
           </div>
