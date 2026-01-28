@@ -8,7 +8,7 @@ export default function ContactPage() {
   return (
     <div className="bg-[#1a1d18] min-h-screen">
       <ContactHero />
-      <ContactComponent />
+      <ContactComponent showHeader={false} />
     </div>
   );
 }

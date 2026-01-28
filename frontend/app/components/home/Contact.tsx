@@ -15,7 +15,11 @@ const colors = {
   }
 };
 
-const ContactComponent = () => {
+interface ContactComponentProps {
+  showHeader?: boolean;
+}
+
+const ContactComponent = ({ showHeader = true }: ContactComponentProps) => {
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state === "submitting";
 
@@ -87,12 +91,14 @@ const ContactComponent = () => {
         {/* Left Section */}
         <div className="space-y-8">
           {/* Header */}
-          <div className="p-8 rounded-2xl shadow-sm" style={{ backgroundColor: colors.bg.secondary }}>
-            <p className="text-sm font-medium mb-2 uppercase tracking-wider" style={{ color: colors.text.muted }}>Contact Us</p>
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight" style={{ color: colors.text.primary }}>
-              Let's talk about<br />your problem.
-            </h1>
-          </div>
+          {showHeader && (
+            <div className="p-8 rounded-2xl shadow-sm" style={{ backgroundColor: colors.bg.secondary }}>
+              <p className="text-sm font-medium mb-2 uppercase tracking-wider" style={{ color: colors.text.muted }}>Contact Us</p>
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight" style={{ color: colors.text.primary }}>
+                Let's talk about<br />your problem.
+              </h1>
+            </div>
+          )}
 
           {/* Location & Help */}
           <div className="grid grid-cols-1 gap-6">
