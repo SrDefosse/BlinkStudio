@@ -225,13 +225,6 @@ export default function Navbar({ className }: NavbarProps) {
     },
   ];
 
-  const pricing = [
-    { label: "Hobby", to: "/hobby" },
-    { label: "Individual", to: "/individual" },
-    { label: "Team", to: "/team" },
-    { label: "Enterprise", to: "/enterprise" },
-  ];
-
   const services = [
     { label: "Websites", to: "/services/websites" },
     { label: "Ecommerce", to: "/services/ecommerce" },
@@ -285,15 +278,14 @@ export default function Navbar({ className }: NavbarProps) {
             </div>
           </MenuItem>
 
-          <MenuItem setActive={setActive} active={active} item="Pricing">
-            <div className="flex flex-col space-y-4 text-sm">
-              {pricing.map((p) => (
-                <HoveredLink key={p.label} to={p.to}>
-                  {p.label}
-                </HoveredLink>
-              ))}
-            </div>
-          </MenuItem>
+
+
+          <Link
+            to="/contact"
+            className="cursor-pointer text-[#f8f7f5] hover:opacity-[0.9] select-none"
+          >
+            Contact
+          </Link>
         </Menu>
       </motion.div>
 
@@ -471,54 +463,15 @@ export default function Navbar({ className }: NavbarProps) {
                   </AnimatePresence>
                 </div>
 
-                {/* Pricing Section */}
-                <div className="py-4">
-                  <button
-                    onClick={() => toggleMobileAccordion("pricing")}
-                    className="w-full flex justify-between items-center text-left text-xl font-medium text-[#f8f7f5]"
+                {/* Contact Section */}
+                <div className="border-t border-[#544237]/30 py-4">
+                  <Link
+                    to="/contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block text-xl font-medium text-[#f8f7f5] hover:text-[#c8b4a0] transition-colors"
                   >
-                    <span>Pricing</span>
-                    <svg
-                      className={cn(
-                        "w-5 h-5 transition-transform",
-                        mobileAccordion === "pricing" ? "rotate-180" : ""
-                      )}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-                  <AnimatePresence>
-                    {mobileAccordion === "pricing" && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pt-4 space-y-3 pl-4">
-                          {pricing.map((p) => (
-                            <Link
-                              key={p.label}
-                              to={p.to}
-                              onClick={() => setMobileMenuOpen(false)}
-                              className="block text-base text-[#c8b4a0] hover:text-[#f8f7f5] transition-colors"
-                            >
-                              {p.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                    Contact
+                  </Link>
                 </div>
               </div>
             </motion.div>

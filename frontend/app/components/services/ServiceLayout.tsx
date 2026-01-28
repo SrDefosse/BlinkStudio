@@ -1,6 +1,6 @@
 
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Link } from "react-router";
 import { cn } from "../../lib/utils";
 
@@ -14,27 +14,13 @@ interface ServiceLayoutProps {
     process?: { title: string; description: string; step: number }[];
     includesTitle?: string;
     includes?: string[];
-    benefitsTitle?: string;
-    benefits?: { title: string; description: string }[];
     stackTitle?: string;
     stack?: string[];
     ctaTitle?: string;
     ctaDescription?: string;
 }
 
-const marqueeVariants = {
-    animate: {
-        x: [0, -1000],
-        transition: {
-            x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 20,
-                ease: "linear",
-            },
-        },
-    },
-};
+
 
 export default function ServiceLayout({
     title,
@@ -45,8 +31,6 @@ export default function ServiceLayout({
     process = [],
     includesTitle = "What's Included",
     includes = [],
-    benefitsTitle = "Key Benefits",
-    benefits = [],
     stackTitle = "Tech Stack",
     stack = [],
     ctaTitle = "Ready to start?",
@@ -61,19 +45,6 @@ export default function ServiceLayout({
     const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
     const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
     const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
-    // Mouse move effect for subtle parallax
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            setMousePosition({
-                x: e.clientX / window.innerWidth - 0.5,
-                y: e.clientY / window.innerHeight - 0.5,
-            });
-        };
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, []);
 
     return (
         <div ref={containerRef} className="bg-[#1a1d18] text-[#e6e1d7] font-primary overflow-x-hidden selection:bg-[#c8b4a0] selection:text-[#1a1d18]">
@@ -124,8 +95,8 @@ export default function ServiceLayout({
                         <div className="hidden md:block w-32 h-[1px] bg-[#c8b4a0]"></div>
                     </div>
 
-                    <div className="overflow-x-auto pb-12 hide-scrollbar px-4 md:px-12">
-                        <div className="flex gap-8 w-max">
+                    <div className="overflow-x-auto pb-12 hide-scrollbar px-4 md:px-12 relative [mask-image:linear-gradient(to_right,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_right,black_90%,transparent_100%)]">
+                        <div className="flex gap-8 w-max pr-12">
                             {problems.map((prob, idx) => (
                                 <motion.div
                                     key={idx}
@@ -150,26 +121,27 @@ export default function ServiceLayout({
             {/* Sticky Process */}
             {process.length > 0 && (
                 <section className="py-32 relative">
-                    <div className="max-w-[90vw] mx-auto flex flex-col lg:flex-row gap-20">
+                    <div className="max-w-[90vw] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
                         <div className="lg:w-1/3 lg:sticky lg:top-32 h-min">
-                            <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-8 leading-none">{processTitle}</h2>
+                            <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-6 leading-none">{processTitle}</h2>
                             <p className="text-[#c8b4a0] text-lg font-mono uppercase tracking-widest">How we make it happen</p>
                         </div>
 
-                        <div className="lg:w-2/3 space-y-32">
+                        <div className="lg:w-2/3 space-y-20">
                             {process.map((step, idx) => (
                                 <motion.div
                                     key={idx}
-                                    initial={{ opacity: 0, y: 50 }}
+                                    initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ margin: "-100px" }}
-                                    transition={{ duration: 0.8 }}
-                                    className="relative pl-8 md:pl-0 border-l lg:border-l-0 border-[#544237]"
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                    className="relative pl-8 md:pl-0 border-l border-[#544237] lg:border-none"
                                 >
-                                    <div className="hidden lg:block absolute -left-4 top-0 w-3 h-3 bg-[#c8b4a0] rounded-full"></div>
-                                    <span className="block text-7xl md:text-9xl font-bold text-[#c8b4a0]/10 absolute -top-12 -left-4 md:-left-20 -z-10">{step.step}</span>
-                                    <h3 className="text-3xl md:text-5xl font-bold mb-6">{step.title}</h3>
-                                    <p className="text-xl text-[#9ca3af] leading-relaxed max-w-2xl">{step.description}</p>
+                                    <span className="text-6xl md:text-8xl font-bold text-[#c8b4a0]/20 block mb-4 md:-ml-1 leading-none">
+                                        {String(step.step).padStart(2, '0')}
+                                    </span>
+                                    <h3 className="text-2xl md:text-4xl font-bold mb-4">{step.title}</h3>
+                                    <p className="text-lg md:text-xl text-[#9ca3af] leading-relaxed max-w-xl">{step.description}</p>
                                 </motion.div>
                             ))}
                         </div>
