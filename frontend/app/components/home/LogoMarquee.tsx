@@ -2,14 +2,14 @@
 import React, { type CSSProperties } from "react";
 
 const LOGOS = [
-  { src: "/logos/stellaris_logo.webp", alt: "Stellaris Education" },
-  { src: "/logos/MT3_logo.webp", alt: "MT3" },
-  { src: "/logos/stoever_logo.webp", alt: "Stoever" },
-  { src: "/logos/mit_logo.webp", alt: "MIT Consultores" },
-  { src: "/logos/sinergia_logo.webp", alt: "Sinergia Telecomunicaciones" },
-  { src: "/logos/fer_tovar_logo.webp", alt: "Fer Tovar" },
-  { src: "/logos/entheo_logo.webp", alt: "Entheo" },
-  { src: "/logos/8esencias_logo.webp", alt: "8 Esencias" },
+  { src: "home-imgs/hero/logos/stellaris_logo.webp", alt: "Stellaris Education" },
+  { src: "home-imgs/hero/logos/MT3_logo.webp", alt: "MT3" },
+  { src: "home-imgs/hero/logos/stoever_logo.webp", alt: "Stoever" },
+  { src: "home-imgs/hero/logos/mit_logo.webp", alt: "MIT Consultores" },
+  { src: "home-imgs/hero/logos/sinergia_logo.webp", alt: "Sinergia Telecomunicaciones" },
+  { src: "home-imgs/hero/logos/fer_tovar_logo.webp", alt: "Fer Tovar" },
+  { src: "home-imgs/hero/logos/entheo_logo.webp", alt: "Entheo" },
+  { src: "home-imgs/hero/logos/8esencias_logo.webp", alt: "8 Esencias" },
 ];
 
 interface LogoMarqueeProps {

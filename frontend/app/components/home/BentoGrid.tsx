@@ -94,6 +94,32 @@ const BlinkStudioShowcase: React.FC = () => {
         <div className="mx-auto max-w-6xl lg:max-w-7xl relative z-10">
           {/* Masonry-style grid: 3 columns x 4 rows on large screens */}
           <div className="grid gap-6 lg:grid-cols-3 lg:auto-rows-[minmax(150px,auto)]">
+            {/* Hero image – Blink Studio (center, spans all rows) */}
+            <div className="relative overflow-hidden rounded-3xl lg:col-start-2 lg:row-start-1 lg:row-span-4" style={{ backgroundColor: colors.bg.tertiary }}>
+              <img
+                src="/home-imgs/bento/bento-1.webp"
+                alt="Blink Studio digital agency"
+                className="h-full w-full object-cover min-h-[300px] md:min-h-[600px]"
+              />
+              <div className="absolute left-6 top-6">
+                <img
+                  src="/home-imgs/hero/blink_logo_white.png"
+                  alt="Blink Studio"
+                  className="h-6 md:h-8 w-auto object-contain opacity-90 drop-shadow-md"
+                />
+              </div>
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="rounded-2xl p-4 backdrop-blur-md" style={{ backgroundColor: `${colors.bg.secondary}B3` }}>
+                  <p className="text-xs font-semibold mb-1" style={{ color: colors.text.primary }}>
+                    Based in Mexico
+                  </p>
+                  <p className="text-xs leading-relaxed opacity-80" style={{ color: colors.text.muted }}>
+                    Serving clients worldwide with digital excellence and innovative solutions.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Our Services (top-left) */}
             <div className="rounded-3xl p-6 shadow-sm border lg:row-span-2" style={{ backgroundColor: colors.bg.secondary, borderColor: `${colors.text.muted}20` }}>
               <div className="flex items-center gap-2 mb-4">
@@ -103,11 +129,10 @@ const BlinkStudioShowcase: React.FC = () => {
                 </h3>
               </div>
               <p className="text-xs leading-relaxed mb-6" style={{ color: colors.text.muted }}>
-                From websites and ecommerce to branding and AI content, we
-                deliver digital solutions that drive growth.
+                We deliver end-to-end digital solutions that drive growth and engagement.
               </p>
 
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 gap-3">
                 <ServiceItem icon={<FiGlobe className="h-4 w-4" />} label="Websites" />
                 <ServiceItem icon={<FiShoppingCart className="h-4 w-4" />} label="Ecommerce" />
                 <ServiceItem icon={<FiLayers className="h-4 w-4" />} label="Landing Pages" />
@@ -117,80 +142,8 @@ const BlinkStudioShowcase: React.FC = () => {
               </div>
             </div>
 
-            {/* Stats Card 1 */}
-            <div className="rounded-3xl p-6 shadow-sm border lg:col-start-1 lg:row-start-3" style={{ backgroundColor: colors.bg.tertiary, borderColor: `${colors.text.secondary}30` }}>
-              <div className="flex items-center justify-between mb-4">
-                <FiTrendingUp className="h-5 w-5" style={{ color: colors.text.secondary }} />
-              </div>
-              <p className="text-3xl font-bold tracking-tight mb-1" style={{ color: colors.text.primary }}>
-                98%
-              </p>
-              <p className="text-xs leading-relaxed" style={{ color: colors.text.muted }}>
-                Client satisfaction rate
-              </p>
-            </div>
-
-            {/* Process (bottom-left) */}
-            <div className="rounded-3xl p-6 shadow-sm border lg:col-start-1 lg:row-start-4" style={{ backgroundColor: colors.bg.secondary, borderColor: `${colors.text.muted}20` }}>
-              <div className="flex items-center gap-2 mb-4">
-                <FiClock className="h-4 w-4" style={{ color: colors.text.secondary }} />
-                <h3 className="text-sm font-semibold" style={{ color: colors.text.primary }}>
-                  Our process
-                </h3>
-              </div>
-              <p className="text-xs leading-relaxed mb-6" style={{ color: colors.text.muted }}>
-                From concept to launch in 2–3 weeks.
-              </p>
-
-              <div className="flex justify-between gap-2">
-                <ProcessStep number="1" label="Discovery" />
-                <ProcessStep number="2" label="Design" />
-                <ProcessStep number="3" label="Develop" />
-                <ProcessStep number="4" label="Launch" />
-              </div>
-            </div>
-
-            {/* Hero image – Blink Studio (center, spans all rows) */}
-            <div className="relative overflow-hidden rounded-3xl lg:col-start-2 lg:row-start-1 lg:row-span-4" style={{ backgroundColor: colors.bg.tertiary }}>
-              <img
-                src="/home-imgs/bento/bento-1.webp"
-                alt="Blink Studio digital agency"
-                className="h-full w-full object-cover min-h-[260px] md:min-h-[600px]"
-              />
-              <div className="absolute left-4 top-4">
-                <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold shadow-sm" style={{ backgroundColor: `${colors.bg.secondary}E6`, color: colors.text.primary }}>
-                  Blink Studio
-                </span>
-              </div>
-              <div className="absolute bottom-4 left-4 right-4">
-                <div className="rounded-2xl p-4 backdrop-blur-sm" style={{ backgroundColor: `${colors.bg.secondary}CC` }}>
-                  <p className="text-xs font-semibold mb-1" style={{ color: colors.text.primary }}>
-                    Based in Mexico
-                  </p>
-                  <p className="text-xs leading-relaxed" style={{ color: colors.text.muted }}>
-                    Serving clients worldwide with digital excellence and innovative solutions.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Service tags (top-right) */}
+            {/* Tech Stack (top-right) */}
             <div className="rounded-3xl p-6 shadow-sm border lg:col-start-3 lg:row-start-1" style={{ backgroundColor: colors.bg.secondary, borderColor: `${colors.text.muted}20` }}>
-              <h3 className="text-xs font-semibold mb-4" style={{ color: colors.text.primary }}>
-                What we do
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                <TagPill>Branding</TagPill>
-                <TagPill>AI Content</TagPill>
-                <TagPill>Chatbots</TagPill>
-                <TagPill>Websites</TagPill>
-                <TagPill>Ecommerce</TagPill>
-                <TagPill>Landing Pages</TagPill>
-              </div>
-            </div>
-
-            {/* Tech Stack */}
-            <div className="rounded-3xl p-6 shadow-sm border lg:col-start-3 lg:row-start-2" style={{ backgroundColor: colors.bg.secondary, borderColor: `${colors.text.muted}20` }}>
               <div className="flex items-center gap-2 mb-4">
                 <FiCode className="h-4 w-4" style={{ color: colors.text.secondary }} />
                 <h3 className="text-xs font-semibold" style={{ color: colors.text.primary }}>
@@ -201,33 +154,55 @@ const BlinkStudioShowcase: React.FC = () => {
                 <TechBadge>React</TechBadge>
                 <TechBadge>TypeScript</TechBadge>
                 <TechBadge>Node.js</TechBadge>
-                <TechBadge>TanStack</TechBadge>
-                <TechBadge>React Router</TechBadge>
+                <TechBadge>Remix</TechBadge>
+                <TechBadge>Tailwind</TechBadge>
               </div>
             </div>
 
-            {/* Client satisfaction metric (bottom-right, spans 2 rows) */}
-            <div className="rounded-3xl p-6 md:p-8 shadow-sm border flex flex-col justify-between lg:col-start-3 lg:row-start-3 lg:row-span-2 min-h-[220px]" style={{ backgroundColor: colors.bg.tertiary, borderColor: `${colors.text.secondary}30` }}>
-              <div className="flex items-center justify-between mb-6">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full shadow-sm" style={{ backgroundColor: colors.bg.secondary }}>
-                  <BsHeartFill className="h-4 w-4" style={{ color: colors.text.secondary }} />
+            {/* Combined Stats Card (bottom-right, spans 3 rows) */}
+            <div className="rounded-3xl p-6 md:p-8 shadow-sm border flex flex-col justify-between lg:col-start-3 lg:row-start-2 lg:row-span-3" style={{ backgroundColor: colors.bg.tertiary, borderColor: `${colors.text.secondary}30` }}>
+              <div className="flex items-center justify-between mb-8">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full shadow-sm" style={{ backgroundColor: colors.bg.secondary }}>
+                  <BsHeartFill className="h-5 w-5" style={{ color: colors.text.secondary }} />
                 </span>
-                <FiAward className="h-5 w-5" style={{ color: colors.text.secondary }} />
+                <FiAward className="h-6 w-6" style={{ color: colors.text.secondary }} />
               </div>
 
-              <div>
-                <p className="text-5xl font-bold tracking-tight mb-2" style={{ color: colors.text.primary }}>
-                  100+
-                </p>
-                <p className="text-xs leading-relaxed mb-6" style={{ color: colors.text.muted }}>
-                  successful projects delivered worldwide.
-                </p>
-
-                <div className="space-y-3 pt-4 border-t" style={{ borderColor: `${colors.text.muted}20` }}>
-                  <StatRow icon={<FiUsers className="h-4 w-4" />} label="50+ Clients" />
-                  <StatRow icon={<FiGlobe className="h-4 w-4" />} label="15+ Countries" />
-                  <StatRow icon={<FiTrendingUp className="h-4 w-4" />} label="3x Avg. Growth" />
+              <div className="space-y-6">
+                <div>
+                  <p className="text-5xl font-bold tracking-tight mb-2" style={{ color: colors.text.primary }}>
+                    100+
+                  </p>
+                  <p className="text-xs leading-relaxed" style={{ color: colors.text.muted }}>
+                    Successful projects delivered worldwide with a 98% client satisfaction rate.
+                  </p>
                 </div>
+
+                <div className="space-y-4 pt-6 border-t" style={{ borderColor: `${colors.text.muted}20` }}>
+                  <StatRow icon={<FiUsers className="h-4 w-4" />} label="50+ Active Clients" />
+                  <StatRow icon={<FiGlobe className="h-4 w-4" />} label="15+ Countries" />
+                  <StatRow icon={<FiTrendingUp className="h-4 w-4" />} label="3x Average ROI Growth" />
+                </div>
+              </div>
+            </div>
+
+            {/* Process (bottom-left) */}
+            <div className="rounded-3xl p-6 shadow-sm border lg:col-start-1 lg:row-start-3 lg:row-span-2" style={{ backgroundColor: colors.bg.secondary, borderColor: `${colors.text.muted}20` }}>
+              <div className="flex items-center gap-2 mb-4">
+                <FiClock className="h-4 w-4" style={{ color: colors.text.secondary }} />
+                <h3 className="text-sm font-semibold" style={{ color: colors.text.primary }}>
+                  Our process
+                </h3>
+              </div>
+              <p className="text-xs leading-relaxed mb-8" style={{ color: colors.text.muted }}>
+                Efficient execution from concept to launch in 2–4 weeks.
+              </p>
+
+              <div className="grid grid-cols-2 gap-4">
+                <ProcessStep number="1" label="Discovery" />
+                <ProcessStep number="2" label="Design" />
+                <ProcessStep number="3" label="Develop" />
+                <ProcessStep number="4" label="Launch" />
               </div>
             </div>
           </div>

@@ -258,13 +258,19 @@ export default function HomeHero() {
           {/* Header */}
           <div className="flex justify-between items-start">
             <div>
-              <h1
-                className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter leading-none"
-                style={{ color: colors[50] }}
+              <div
+                className="opacity-0"
+                style={{
+                  animation: "word-appear 0.8s ease-out forwards",
+                  animationDelay: "0s"
+                }}
               >
-                <span className="word" data-delay="0">BLINK</span>{" "}
-                <span className="word" data-delay="150">STUDIO</span>
-              </h1>
+                <img
+                  src="/home-imgs/hero/blink_logo_white.png"
+                  alt="Blink Studio"
+                  className="h-28 md:h-32 lg:h-36 w-auto object-contain"
+                />
+              </div>
               <p
                 className="mt-2 text-xs md:text-sm font-mono uppercase tracking-[0.3em] opacity-0"
                 style={{
@@ -296,9 +302,7 @@ export default function HomeHero() {
                 {[
                   { text: "WEBSITES", delay: 800 },
                   { text: "ECOMMERCE WEBSITES", delay: 1000 },
-                  { text: "LANDING PAGES", delay: 1200 },
                   { text: "BRANDING", delay: 1400 },
-                  { text: "AI AUDIOVISUAL CONTENT", delay: 1600 },
                   { text: "CHATBOTS", delay: 1800 },
                 ].map((service, index) => (
                   <div

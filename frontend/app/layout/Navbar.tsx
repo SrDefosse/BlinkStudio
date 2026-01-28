@@ -144,6 +144,7 @@ export default function Navbar({ className }: NavbarProps) {
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
 
   // Cerrar menú móvil al hacer click fuera
@@ -152,7 +153,9 @@ export default function Navbar({ className }: NavbarProps) {
       if (
         mobileMenuOpen &&
         mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target as Node)
+        !mobileMenuRef.current.contains(event.target as Node) &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node)
       ) {
         setMobileMenuOpen(false);
       }
@@ -229,6 +232,13 @@ export default function Navbar({ className }: NavbarProps) {
     { label: "Enterprise", to: "/enterprise" },
   ];
 
+  const services = [
+    { label: "Websites", to: "/services/websites" },
+    { label: "Ecommerce", to: "/services/ecommerce" },
+    { label: "Branding", to: "/services/branding" },
+    { label: "AI Chatbots", to: "/services/chatbots" },
+  ];
+
   const toggleMobileAccordion = (section: string) => {
     setMobileAccordion(mobileAccordion === section ? null : section);
   };
@@ -257,12 +267,15 @@ export default function Navbar({ className }: NavbarProps) {
             Home
           </Link>
 
-          <Link
-            to="/services"
-            className="cursor-pointer text-[#f8f7f5] hover:opacity-[0.9] select-none"
-          >
-            Services
-          </Link>
+          <MenuItem setActive={setActive} active={active} item="Services">
+            <div className="flex flex-col space-y-4 text-sm">
+              {services.map((service) => (
+                <HoveredLink key={service.label} to={service.to}>
+                  {service.label}
+                </HoveredLink>
+              ))}
+            </div>
+          </MenuItem>
 
           <MenuItem setActive={setActive} active={active} item="Portfolio">
             <div className="text-sm grid grid-cols-2 gap-10 p-4">
@@ -287,76 +300,137 @@ export default function Navbar({ className }: NavbarProps) {
       {/* Mobile Menu - Visible only on mobile */}
       <div
         ref={mobileMenuRef}
-        className={cn("fixed top-4 inset-x-0 z-50 px-4 md:hidden", className)}
+        className={cn("fixed top-4 right-4 z-50 md:hidden", className)}
       >
         {/* Mobile Menu Button */}
-        <div className="flex justify-end">
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-[#2a2e26]/80 backdrop-blur-md border border-[#544237]/30 shadow-2xl"
-            aria-label="Toggle menu"
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="p-3 rounded-lg bg-[#2a2e26]/80 backdrop-blur-md border border-[#544237]/30 shadow-2xl"
+          aria-label="Toggle menu"
+        >
+          <svg
+            className="w-6 h-6 text-[#f8f7f5]"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <svg
-              className="w-6 h-6 text-[#f8f7f5]"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {mobileMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
+            {mobileMenuOpen ? (
+              <path d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+      </div>
 
-        {/* Mobile Dropdown Menu */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
+      {/* Mobile Sidebar */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop */}
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.2 }}
-              className="mt-2 bg-[#1a1d18]/90 backdrop-blur-lg border border-[#544237]/30 rounded-2xl shadow-xl overflow-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 z-40 md:hidden"
+            />
+
+            {/* Sidebar */}
+            <motion.div
+              ref={sidebarRef}
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 h-full w-[75vw] max-w-xs bg-[#1a1d18] border-l border-[#544237]/30 z-50 md:hidden overflow-y-auto"
             >
-              <div className="p-4">
+              <div className="p-6 pt-20">
+                {/* Close button */}
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="absolute top-4 right-4 p-2 text-[#c8b4a0] hover:text-[#f8f7f5]"
+                  aria-label="Close menu"
+                >
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+
                 {/* Home Section */}
-                <div className="border-b border-neutral-200 pb-3">
+                <div className="border-b border-[#544237]/30 pb-4 mb-4">
                   <Link
                     to="/"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block font-medium text-[#f8f7f5] hover:opacity-70"
+                    className="block text-xl font-medium text-[#f8f7f5] hover:text-[#c8b4a0] transition-colors"
                   >
                     Home
                   </Link>
                 </div>
 
                 {/* Services Section */}
-                <div className="border-b border-neutral-200 py-3">
-                  <Link
-                    to="/services"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block font-medium text-[#f8f7f5] hover:opacity-70"
+                <div className="border-b border-[#544237]/30 py-4">
+                  <button
+                    onClick={() => toggleMobileAccordion("services")}
+                    className="w-full flex justify-between items-center text-left text-xl font-medium text-[#f8f7f5]"
                   >
-                    Services
-                  </Link>
+                    <span>Services</span>
+                    <svg
+                      className={cn(
+                        "w-5 h-5 transition-transform",
+                        mobileAccordion === "services" ? "rotate-180" : ""
+                      )}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  <AnimatePresence>
+                    {mobileAccordion === "services" && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-4 space-y-3 pl-4">
+                          {services.map((s) => (
+                            <Link
+                              key={s.label}
+                              to={s.to}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block text-base text-[#c8b4a0] hover:text-[#f8f7f5] transition-colors"
+                            >
+                              {s.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* Portfolio Section */}
-                <div className="border-b border-neutral-200 py-3">
+                <div className="border-b border-[#544237]/30 py-4">
                   <button
                     onClick={() => toggleMobileAccordion("products")}
-                    className="w-full flex justify-between items-center text-left font-medium text-[#f8f7f5]"
+                    className="w-full flex justify-between items-center text-left text-xl font-medium text-[#f8f7f5]"
                   >
                     <span>Portfolio</span>
                     <svg
                       className={cn(
-                        "w-4 h-4 transition-transform",
+                        "w-5 h-5 transition-transform",
                         mobileAccordion === "products" ? "rotate-180" : ""
                       )}
                       fill="none"
@@ -380,13 +454,13 @@ export default function Navbar({ className }: NavbarProps) {
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                       >
-                        <div className="pt-3 space-y-2 pl-2">
+                        <div className="pt-4 space-y-3 pl-4">
                           {products.map((p) => (
                             <a
                               key={p.title}
                               href={p.href}
                               onClick={() => setMobileMenuOpen(false)}
-                              className="block text-sm text-[#c8b4a0] hover:text-[#f8f7f5]"
+                              className="block text-base text-[#c8b4a0] hover:text-[#f8f7f5] transition-colors"
                             >
                               {p.title}
                             </a>
@@ -398,15 +472,15 @@ export default function Navbar({ className }: NavbarProps) {
                 </div>
 
                 {/* Pricing Section */}
-                <div className="pt-3">
+                <div className="py-4">
                   <button
                     onClick={() => toggleMobileAccordion("pricing")}
-                    className="w-full flex justify-between items-center text-left font-medium text-[#f8f7f5]"
+                    className="w-full flex justify-between items-center text-left text-xl font-medium text-[#f8f7f5]"
                   >
                     <span>Pricing</span>
                     <svg
                       className={cn(
-                        "w-4 h-4 transition-transform",
+                        "w-5 h-5 transition-transform",
                         mobileAccordion === "pricing" ? "rotate-180" : ""
                       )}
                       fill="none"
@@ -430,13 +504,13 @@ export default function Navbar({ className }: NavbarProps) {
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                       >
-                        <div className="pt-3 space-y-2 pl-2">
+                        <div className="pt-4 space-y-3 pl-4">
                           {pricing.map((p) => (
                             <Link
                               key={p.label}
                               to={p.to}
                               onClick={() => setMobileMenuOpen(false)}
-                              className="block text-sm text-[#c8b4a0] hover:text-[#f8f7f5]"
+                              className="block text-base text-[#c8b4a0] hover:text-[#f8f7f5] transition-colors"
                             >
                               {p.label}
                             </Link>
@@ -448,9 +522,9 @@ export default function Navbar({ className }: NavbarProps) {
                 </div>
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }

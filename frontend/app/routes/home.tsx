@@ -5,7 +5,7 @@ import Values from "../components/home/Values";
 import Process from "../components/home/Process";
 import ShowCase2 from "../components/home/ShowCase2";
 import ContactSection from "../components/home/Contact";
-import Navbar from "../layout/Navbar";
+// import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
 import useSmoothScroll from "../hooks/useSmoothScroll";
 
@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <main className="w-full relative bg-[#1a1d18]">
-      {/* <Navbar /> */}
+      {/* Navbar is now in root.tsx */}
       <section>
         <HomeHero />
       </section>
