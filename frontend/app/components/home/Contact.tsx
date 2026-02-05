@@ -87,7 +87,7 @@ const ContactComponent = ({ showHeader = true }: ContactComponentProps) => {
 
   return (
     <div className="min-h-screen p-4 md:p-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8">
         {/* Left Section */}
         <div className="space-y-8">
           {/* Header */}

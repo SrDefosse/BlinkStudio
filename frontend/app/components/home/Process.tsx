@@ -130,7 +130,7 @@ export default function Process() {
         <div className="grid grid-cols-1 md:grid-cols-2 px-4 md:px-8">
           <div className="grid gap-2 order-1 md:order-none">
             {PLAN_IMAGES.map((src, index) => (
-              <figure key={index} className="md:sticky md:top-0 h-screen grid place-content-center">
+              <figure key={index} className="sticky top-0 h-screen grid place-content-center">
                 <img
                   src={src}
                   alt=""

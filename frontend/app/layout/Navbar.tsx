@@ -95,17 +95,24 @@ interface MenuItemProps {
   setActive: (item: string | null) => void;
   active: string | null;
   item: string;
+  to?: string;
   children: React.ReactNode;
 }
 
-const MenuItem = ({ setActive, active, item, children }: MenuItemProps) => {
+const MenuItem = ({ setActive, active, item, to, children }: MenuItemProps) => {
   return (
     <div onMouseEnter={() => setActive(item)} className="relative">
       <motion.p
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-[#f8f7f5] hover:opacity-[0.9] select-none"
       >
-        {item}
+        {to ? (
+          <Link to={to} className="block">
+            {item}
+          </Link>
+        ) : (
+          item
+        )}
       </motion.p>
 
       {active !== null && (
@@ -270,7 +277,7 @@ export default function Navbar({ className }: NavbarProps) {
             </div>
           </MenuItem>
 
-          <MenuItem setActive={setActive} active={active} item="Portfolio">
+          <MenuItem setActive={setActive} active={active} item="Portfolio" to="/portfolio">
             <div className="text-sm grid grid-cols-2 gap-10 p-4">
               {products.map((p) => (
                 <ProductItem key={p.title} {...p} />
@@ -415,28 +422,37 @@ export default function Navbar({ className }: NavbarProps) {
 
                 {/* Portfolio Section */}
                 <div className="border-b border-[#544237]/30 py-4">
-                  <button
-                    onClick={() => toggleMobileAccordion("products")}
-                    className="w-full flex justify-between items-center text-left text-xl font-medium text-[#f8f7f5]"
-                  >
-                    <span>Portfolio</span>
-                    <svg
-                      className={cn(
-                        "w-5 h-5 transition-transform",
-                        mobileAccordion === "products" ? "rotate-180" : ""
-                      )}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                  <div className="w-full flex justify-between items-center">
+                    <Link
+                      to="/portfolio"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-left text-xl font-medium text-[#f8f7f5] flex-1 hover:text-[#c8b4a0] transition-colors"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
+                      Portfolio
+                    </Link>
+                    <button
+                      onClick={() => toggleMobileAccordion("products")}
+                      className="p-2 -mr-2"
+                      aria-label="Toggle portfolio submenu"
+                    >
+                      <svg
+                        className={cn(
+                          "w-5 h-5 text-[#f8f7f5] transition-transform",
+                          mobileAccordion === "products" ? "rotate-180" : ""
+                        )}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                   <AnimatePresence>
                     {mobileAccordion === "products" && (
                       <motion.div

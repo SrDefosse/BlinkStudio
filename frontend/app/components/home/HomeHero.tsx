@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router";
 import LogoMarquee from "./LogoMarquee";
 
 const colors = {
@@ -300,14 +301,15 @@ export default function HomeHero() {
             <div className="w-full max-w-4xl">
               <div className="space-y-1 md:space-y-2">
                 {[
-                  { text: "WEBSITES", delay: 800 },
-                  { text: "ECOMMERCE WEBSITES", delay: 1000 },
-                  { text: "BRANDING", delay: 1400 },
-                  { text: "CHATBOTS", delay: 1800 },
+                  { text: "WEBSITES", delay: 800, link: "/services/websites" },
+                  { text: "ECOMMERCE WEBSITES", delay: 1000, link: "/services/ecommerce" },
+                  { text: "BRANDING", delay: 1400, link: "/services/branding" },
+                  { text: "CHATBOTS", delay: 1800, link: "/services/chatbots" },
                 ].map((service, index) => (
-                  <div
+                  <Link
+                    to={service.link}
                     key={index}
-                    className="group flex items-center gap-4 py-2 md:py-3 border-b border-[#c8b4a0]/10 hover:border-[#c8b4a0]/30 transition-colors cursor-default"
+                    className="group flex items-center gap-4 py-2 md:py-3 border-b border-[#c8b4a0]/10 hover:border-[#c8b4a0]/30 transition-colors cursor-pointer"
                   >
                     <span
                       className="word text-[#c8b4a0]/40 text-sm font-mono"
@@ -326,7 +328,7 @@ export default function HomeHero() {
                       className="flex-1 h-px opacity-0 group-hover:opacity-20 transition-opacity"
                       style={{ background: colors[200] }}
                     />
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

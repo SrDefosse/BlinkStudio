@@ -2,6 +2,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router";
+import { FaArrowRight } from "react-icons/fa";
 import { cn } from "../../lib/utils";
 import VerticalImageStack from "./VerticalImageStack";
 import { LogoCarousel } from "./LogoCarousel";
@@ -125,6 +126,21 @@ export default function ServiceLayout({
                                     </motion.div>
                                 ))}
                             </div>
+                            {/* Mobile Swipe Indicator */}
+                            <motion.div
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{
+                                    repeat: Infinity,
+                                    repeatType: "reverse",
+                                    duration: 1,
+                                    delay: 1
+                                }}
+                                className="absolute bottom-0 right-8 md:hidden flex items-center gap-2 text-[#c8b4a0] opacity-80 pointer-events-none pb-4"
+                            >
+                                <span className="text-sm font-mono uppercase tracking-widest">Swipe</span>
+                                <FaArrowRight />
+                            </motion.div>
                         </div>
                     </section>
                 )}

@@ -189,9 +189,7 @@ type FooterLinkGroup = {
 
 // ===== Data =====
 const socialLinks: FooterLink[] = [
-  { title: "Facebook", href: "#", icon: FaFacebook },
   { title: "Instagram", href: "#", icon: FaInstagram },
-  { title: "Youtube", href: "#", icon: FaYoutube },
   { title: "LinkedIn", href: "#", icon: FaLinkedin },
 ];
 
@@ -199,11 +197,10 @@ const footerLinkGroups: FooterLinkGroup[] = [
   {
     label: "Services",
     links: [
-      { title: "Web Development", href: "/web-dev" },
-      { title: "Branding & Identity", href: "/branding" },
-      { title: "AI Driven Content Creation", href: "/ai-content-creation" },
-      { title: "Chatbots", href: "/chatbots" },
-      { title: "Automation Systems", href: "/automation-systems" },
+      { title: "Websites", href: "/services/websites" },
+      { title: "Ecommerce", href: "/services/ecommerce" },
+      { title: "Branding", href: "/services/branding" },
+      { title: "AI Chatbots", href: "/services/chatbots" },
     ],
   },
   {
@@ -213,15 +210,6 @@ const footerLinkGroups: FooterLinkGroup[] = [
       { title: "Sinergia Telecomunicaciones", href: "https://sinergia-telecomunicaciones.com.mx" },
       { title: "Stellaris Education", href: "https://stellarisnashville.com" },
       { title: "Stoever", href: "https://stoever.com.mx" },
-    ],
-  },
-  {
-    label: "Pricing",
-    links: [
-      { title: "Hobby", href: "/hobby" },
-      { title: "Individual", href: "/individual" },
-      { title: "Team", href: "/team" },
-      { title: "Enterprise", href: "/enterprise" },
     ],
   },
 ];

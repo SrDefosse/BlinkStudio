@@ -7,4 +7,5 @@ export default [
     route("services/ecommerce", "routes/services/ecommerce.tsx"),
     route("services/branding", "routes/services/branding.tsx"),
     route("services/chatbots", "routes/services/chatbots.tsx"),
+    route("portfolio", "routes/portfolio.tsx"),
 ] satisfies RouteConfig;
