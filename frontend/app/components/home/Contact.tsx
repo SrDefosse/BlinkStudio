@@ -153,7 +153,7 @@ const ContactComponent = ({ showHeader = true }: ContactComponentProps) => {
           <div className="space-y-6">
             <div>
               <p className="text-sm mb-3" style={{ color: colors.text.muted }}>Mail us at</p>
-              <p className="font-semibold mb-4" style={{ color: colors.text.primary }}>blinksites@gmail.com</p>
+              <p className="font-semibold mb-4" style={{ color: colors.text.primary }}>blinksitesweb@gmail.com</p>
               <div className="flex items-center gap-4">
                 <span className="text-sm" style={{ color: colors.text.muted }}>OR</span>
                 <button type="button" className="p-3 rounded-lg transition-colors hover:opacity-80" style={{ backgroundColor: colors.bg.tertiary }}>

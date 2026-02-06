@@ -1,11 +1,9 @@
-"use client"
 
 import React, {
     useCallback,
     useEffect,
     useMemo,
     useState,
-    type SVGProps,
 } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 

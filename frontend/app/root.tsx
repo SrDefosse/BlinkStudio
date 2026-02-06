@@ -25,8 +25,11 @@ export const links: Route.LinksFunction = () => [
 ];
 
 import Navbar from "./layout/Navbar";
+import useSmoothScroll from "./hooks/useSmoothScroll";
+import useScrollToTop from "./hooks/useScrollToTop";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  useSmoothScroll();
   return (
     <html lang="en">
       <head>
@@ -46,6 +49,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  useScrollToTop();
   return <Outlet />;
 }
 

@@ -86,37 +86,35 @@ export default function Chatbots() {
             ]}
 
             stackTitle="AI Tech Stack"
-            stack={["OpenAI API", "LangChain", "Python", "Vector Databases", "Vercel AI SDK", "Supabase"]}
             stackImages={[
                 {
                     id: 1,
-                    src: "/images/chatbots/chatbot-voice.jpg",
+                    src: "/services-imgs/chatbots/chatbot-voice.jpg",
                     alt: "AI Voice Interface",
                 },
                 {
                     id: 2,
-                    src: "/images/chatbots/blink-studio-logo.jpg",
+                    src: "/services-imgs/chatbots/blink-studio-logo.jpg",
                     alt: "Blink Studio Identity",
                 },
                 {
                     id: 3,
-                    src: "/images/chatbots/blink-ia-graph.jpg",
+                    src: "/services-imgs/chatbots/blink-ia-graph.jpg",
                     alt: "AI Logic Flow",
                 },
                 {
                     id: 4,
-                    src: "/images/chatbots/automation-workflow.jpg",
+                    src: "/services-imgs/chatbots/automation-workflow.jpg",
                     alt: "Home Automation Workflow",
                 },
                 {
                     id: 5,
-                    src: "/images/chatbots/blink-ia-voice.jpg",
+                    src: "/services-imgs/chatbots/blink-ia-voice.jpg",
                     alt: "AI Voice Interaction",
                 },
             ]}
 
             ctaTitle="Future-proof your business"
-            ctaDescription="Start automating your growth with intelligent agents."
         />
     );
 }

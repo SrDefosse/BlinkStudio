@@ -86,38 +86,36 @@ export default function Websites() {
             ]}
 
             stackTitle="Our Tech Stack"
-            stack={["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Node.js"]}
 
             stackImages={[
                 {
                     id: 1,
-                    src: "/images/websites/website-creacy.jpg",
+                    src: "/services-imgs/websites/website-creacy.jpg",
                     alt: "Creacy Website Design",
                 },
                 {
                     id: 2,
-                    src: "/images/websites/mobile-habit.jpg",
+                    src: "/services-imgs/websites/mobile-habit.jpg",
                     alt: "Mobile Habit Tracking App",
                 },
                 {
                     id: 3,
-                    src: "/images/websites/dashboard-logistics.jpg",
+                    src: "/services-imgs/websites/dashboard-logistics.jpg",
                     alt: "Logistics Dashboard",
                 },
                 {
                     id: 4,
-                    src: "/images/websites/website-strive.jpg",
+                    src: "/services-imgs/websites/website-strive.jpg",
                     alt: "Strive Studio Website",
                 },
                 {
                     id: 5,
-                    src: "/images/websites/dashboard-sales.jpg",
+                    src: "/services-imgs/websites/dashboard-sales.jpg",
                     alt: "Sales CRM Dashboard",
                 },
             ]}
 
             ctaTitle="Ready to upgrade your web presence?"
-            ctaDescription="Let's build a website that actually works for your business."
         />
     );
 }

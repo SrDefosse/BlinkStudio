@@ -1,5 +1,5 @@
 import { type MetaFunction } from "react-router";
-import HomeBackground from "../components/home/HomeBackground";
+import HomeBackground from "../layout/HomeBackground";
 import { DraggableContainer, GridBody, GridItem } from "../components/portfolio/DraggableContainer";
 
 export const meta: MetaFunction = () => {
@@ -25,29 +25,29 @@ const colors = {
 // Images collected from service pages
 const portfolioImages = [
     // Websites
-    { id: 1, src: "/images/websites/website-creacy.jpg", alt: "Creacy Website Design" },
-    { id: 2, src: "/images/websites/mobile-habit.jpg", alt: "Mobile Habit Tracking App" },
-    { id: 3, src: "/images/websites/dashboard-logistics.jpg", alt: "Logistics Dashboard" },
-    { id: 4, src: "/images/websites/website-strive.jpg", alt: "Strive Studio Website" },
-    { id: 5, src: "/images/websites/dashboard-sales.jpg", alt: "Sales CRM Dashboard" },
+    { id: 1, src: "/services-imgs/websites/website-creacy.jpg", alt: "Creacy Website Design" },
+    { id: 2, src: "/services-imgs/websites/mobile-habit.jpg", alt: "Mobile Habit Tracking App" },
+    { id: 3, src: "/services-imgs/websites/dashboard-logistics.jpg", alt: "Logistics Dashboard" },
+    { id: 4, src: "/services-imgs/websites/website-strive.jpg", alt: "Strive Studio Website" },
+    { id: 5, src: "/services-imgs/websites/dashboard-sales.jpg", alt: "Sales CRM Dashboard" },
     // Ecommerce
-    { id: 6, src: "/images/ecommerce/ecommerce-furniture.jpg", alt: "Furniture Store Design" },
-    { id: 7, src: "/images/ecommerce/ecommerce-mobile-app.jpg", alt: "Mobile Commerce App" },
-    { id: 8, src: "/images/ecommerce/ecommerce-furniture-app.jpg", alt: "Furniture Shopping App" },
-    { id: 9, src: "/images/ecommerce/ecommerce-pet-store.png", alt: "Pet Store E-commerce" },
-    { id: 10, src: "/images/ecommerce/ecommerce-skincare.png", alt: "Skincare Product Page" },
+    { id: 6, src: "/services-imgs/ecommerce/ecommerce-furniture.jpg", alt: "Furniture Store Design" },
+    { id: 7, src: "/services-imgs/ecommerce/ecommerce-mobile-app.jpg", alt: "Mobile Commerce App" },
+    { id: 8, src: "/services-imgs/ecommerce/ecommerce-furniture-app.jpg", alt: "Furniture Shopping App" },
+    { id: 9, src: "/services-imgs/ecommerce/ecommerce-pet-store.png", alt: "Pet Store E-commerce" },
+    { id: 10, src: "/services-imgs/ecommerce/ecommerce-skincare.png", alt: "Skincare Product Page" },
     // Branding
-    { id: 11, src: "/images/branding/branding-homie.jpg", alt: "Homie Branding Project" },
-    { id: 12, src: "/images/branding/branding-studio-lab.png", alt: "Studio Lab Coat Branding" },
-    { id: 13, src: "/images/branding/branding-m.jpg", alt: "M Branding Logo" },
-    { id: 14, src: "/images/branding/branding-bpm.jpg", alt: "BPM Brand Application" },
-    { id: 15, src: "/images/branding/branding-studio-aop.png", alt: "Studio AOP Logo" },
+    { id: 11, src: "/services-imgs/branding/branding-homie.jpg", alt: "Homie Branding Project" },
+    { id: 12, src: "/services-imgs/branding/branding-studio-lab.png", alt: "Studio Lab Coat Branding" },
+    { id: 13, src: "/services-imgs/branding/branding-m.jpg", alt: "M Branding Logo" },
+    { id: 14, src: "/services-imgs/branding/branding-bpm.jpg", alt: "BPM Brand Application" },
+    { id: 15, src: "/services-imgs/branding/branding-studio-aop.png", alt: "Studio AOP Logo" },
     // Chatbots
-    { id: 16, src: "/images/chatbots/chatbot-voice.jpg", alt: "AI Voice Interface" },
-    { id: 17, src: "/images/chatbots/blink-studio-logo.jpg", alt: "Blink Studio Identity" },
-    { id: 18, src: "/images/chatbots/blink-ia-graph.jpg", alt: "AI Logic Flow" },
-    { id: 19, src: "/images/chatbots/automation-workflow.jpg", alt: "Home Automation Workflow" },
-    { id: 20, src: "/images/chatbots/blink-ia-voice.jpg", alt: "AI Voice Interaction" },
+    { id: 16, src: "/services-imgs/chatbots/chatbot-voice.jpg", alt: "AI Voice Interface" },
+    { id: 17, src: "/services-imgs/chatbots/blink-studio-logo.jpg", alt: "Blink Studio Identity" },
+    { id: 18, src: "/services-imgs/chatbots/blink-ia-graph.jpg", alt: "AI Logic Flow" },
+    { id: 19, src: "/services-imgs/chatbots/automation-workflow.jpg", alt: "Home Automation Workflow" },
+    { id: 20, src: "/services-imgs/chatbots/blink-ia-voice.jpg", alt: "AI Voice Interaction" },
 ];
 
 export default function Portfolio() {

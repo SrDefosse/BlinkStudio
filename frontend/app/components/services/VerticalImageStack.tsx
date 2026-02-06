@@ -1,38 +1,5 @@
-"use client"
-
 import { useState, useCallback, useEffect, useRef } from "react"
 import { motion, type PanInfo } from "framer-motion"
-
-// Replaced next/image with standard img tag for Vite compatibility
-// You might need to adjust styles or use a compatible image component if available
-
-const images = [
-    {
-        id: 1,
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/luxury-black-sneaker-with-red-sole-on-grey-backgro-hj40sZT8MUUSeLz18VN7EjhcnV0kSD.jpg",
-        alt: "Black sneaker with red sole",
-    },
-    {
-        id: 2,
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/white-minimalist-sneaker-on-light-background-xQxkXgGrSrAe6pvLPNC6yrh20Atqoa.jpg",
-        alt: "White minimalist sneaker",
-    },
-    {
-        id: 3,
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/navy-blue-running-shoe-on-gradient-background-E1spqSK9gDvh3gTNwASkttEg76nZgm.jpg",
-        alt: "Navy blue running shoe",
-    },
-    {
-        id: 4,
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/red-athletic-sneaker-on-dark-background-skamDX1NbCRW4jvHxijkfmCnHGr6NJ.jpg",
-        alt: "Red athletic sneaker",
-    },
-    {
-        id: 5,
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/green-forest-hiking-boot-on-natural-background-T41PNLzI60G2u6rFIRxeCbKT6RWKOH.jpg",
-        alt: "Green hiking boot",
-    },
-]
 
 interface ImageItems {
     id: number;
@@ -41,14 +8,13 @@ interface ImageItems {
 }
 
 interface VerticalImageStackProps {
-    images?: ImageItems[];
+    images: ImageItems[];
 }
 
-export default function VerticalImageStack({ images: propImages }: VerticalImageStackProps) {
-    const displayImages = propImages || images;
+export default function VerticalImageStack({ images }: VerticalImageStackProps) {
     const [currentIndex, setCurrentIndex] = useState(0)
     const lastNavigationTime = useRef(0)
-    const navigationCooldown = 400 // ms between navigations
+    const navigationCooldown = 400
 
     const navigate = useCallback((newDirection: number) => {
         const now = Date.now()
@@ -57,9 +23,9 @@ export default function VerticalImageStack({ images: propImages }: VerticalImage
 
         setCurrentIndex((prev) => {
             if (newDirection > 0) {
-                return prev === displayImages.length - 1 ? 0 : prev + 1
+                return prev === images.length - 1 ? 0 : prev + 1
             }
-            return prev === 0 ? displayImages.length - 1 : prev - 1
+            return prev === 0 ? images.length - 1 : prev - 1
         })
     }, [])
 
@@ -91,7 +57,7 @@ export default function VerticalImageStack({ images: propImages }: VerticalImage
     }, [handleWheel])
 
     const getCardStyle = (index: number) => {
-        const total = displayImages.length
+        const total = images.length
         let diff = index - currentIndex
         if (diff > total / 2) diff -= total
         if (diff < -total / 2) diff += total
@@ -112,7 +78,7 @@ export default function VerticalImageStack({ images: propImages }: VerticalImage
     }
 
     const isVisible = (index: number) => {
-        const total = displayImages.length
+        const total = images.length
         let diff = index - currentIndex
         if (diff > total / 2) diff -= total
         if (diff < -total / 2) diff += total
@@ -128,7 +94,7 @@ export default function VerticalImageStack({ images: propImages }: VerticalImage
 
             {/* Card Stack */}
             <div className="relative flex h-[500px] w-[320px] items-center justify-center" style={{ perspective: "1200px" }}>
-                {displayImages.map((image, index) => {
+                {images.map((image, index) => {
                     if (!isVisible(index)) return null
                     const style = getCardStyle(index)
                     const isCurrent = index === currentIndex
@@ -187,7 +153,7 @@ export default function VerticalImageStack({ images: propImages }: VerticalImage
 
             {/* Navigation dots */}
             <div className="absolute right-8 top-1/2 flex -translate-y-1/2 flex-col gap-2">
-                {displayImages.map((_, index) => (
+                {images.map((_, index) => (
                     <button
                         key={index}
                         onClick={() => {
@@ -255,7 +221,7 @@ export default function VerticalImageStack({ images: propImages }: VerticalImage
                         {String(currentIndex + 1).padStart(2, "0")}
                     </span>
                     <div className="my-2 h-px w-8 bg-white/20" />
-                    <span className="text-sm text-neutral-400 tabular-nums">{String(displayImages.length).padStart(2, "0")}</span>
+                    <span className="text-sm text-neutral-400 tabular-nums">{String(images.length).padStart(2, "0")}</span>
                 </div>
             </div>
         </div>

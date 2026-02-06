@@ -3,11 +3,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router";
 import { FaArrowRight } from "react-icons/fa";
-import { cn } from "../../lib/utils";
 import VerticalImageStack from "./VerticalImageStack";
 import { LogoCarousel } from "./LogoCarousel";
-import { FramerMotionIcon, HydrogenIcon, NextJsIcon, TailwindIcon, TypeScriptIcon } from "./TechIcons";
-import HomeBackground from "../home/HomeBackground";
+import HomeBackground from "../../layout/HomeBackground";
 
 interface ServiceLayoutProps {
     title: string;
@@ -20,30 +18,27 @@ interface ServiceLayoutProps {
     includesTitle?: string;
     includes?: string[];
     stackTitle?: string;
-    stack?: string[];
     stackImages?: { id: number; src: string; alt: string; }[];
     benefitsTitle?: string;
     benefits?: { title: string; description: string; }[];
     ctaTitle?: string;
-    ctaDescription?: string;
 }
 
 export default function ServiceLayout({
     title,
     subtitle,
-    problemTitle = "The Problem",
+    problemTitle = "",
     problems = [],
-    processTitle = "Our Process",
+    processTitle = "",
     process = [],
-    includesTitle = "What's Included",
+    includesTitle = "",
     includes = [],
-    stackTitle = "Tech Stack",
-    stack = [],
+    stackTitle = "",
     stackImages,
-    benefitsTitle = "The Benefits",
+    benefitsTitle = "",
     benefits = [],
-    ctaTitle = "Ready to start?",
-    ctaDescription = "Let's build something amazing together.",
+    ctaTitle = "",
+
 }: ServiceLayoutProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -70,9 +65,9 @@ export default function ServiceLayout({
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                         >
-                            <h1 className="text-[12vw] leading-[0.85] font-bold tracking-tighter uppercase mix-blend-difference text-transparent bg-clip-text bg-gradient-to-b from-[#e6e1d7] to-[#544237]">
+                            <h1 className="text-[9vw] leading-[0.85] font-bold tracking-tighter uppercase mix-blend-difference text-transparent bg-clip-text bg-gradient-to-b from-[#e6e1d7] to-[#544237]">
                                 {title.split(' ')[0]} <br />
-                                <span className="text-[12vw] text-[#e6e1d7] outline-text">{title.split(' ').slice(1).join(' ')}</span>
+                                <span className="text-[9vw] text-[#e6e1d7]">{title.split(' ').slice(1).join(' ')}</span>
                             </h1>
                         </motion.div>
 
@@ -95,9 +90,11 @@ export default function ServiceLayout({
                 </section>
 
                 {/* Vertical Image Stack */}
-                <section className="py-20">
-                    <VerticalImageStack images={stackImages} />
-                </section>
+                {stackImages && stackImages.length > 0 && (
+                    <section className="py-20">
+                        <VerticalImageStack images={stackImages} />
+                    </section>
+                )}
 
                 {/* Horizontal Scroll Problems */}
                 {problems.length > 0 && (
@@ -183,12 +180,18 @@ export default function ServiceLayout({
                     </div>
                     <div className="w-full max-w-5xl mx-auto px-4">
                         <LogoCarousel columnCount={3} logos={[
-                            { name: "Framework", id: 1, img: "/images/tech/logo-1.png" },
-                            { name: "Design", id: 2, img: "/images/tech/logo-2.png" },
-                            { name: "Language", id: 3, img: "/images/tech/logo-3.png", className: "invert brightness-0" },
-                            { name: "Animation", id: 4, img: "/images/tech/logo-4.png" },
-                            { name: "Backend", id: 5, img: "/images/tech/logo-5.png" },
-                            { name: "Hydrogen", id: 6, img: "/images/tech/logo-6.png" },
+                            { name: "Framework", id: 1, img: "/services-imgs/tech-logos/logo-1.webp" },
+                            { name: "Design", id: 2, img: "/services-imgs/tech-logos/logo-2.webp" },
+                            { name: "Language", id: 3, img: "/services-imgs/tech-logos/logo-3.webp" },
+                            { name: "Animation", id: 4, img: "/services-imgs/tech-logos/logo-4.webp" },
+                            { name: "Backend", id: 5, img: "/services-imgs/tech-logos/logo-5.webp" },
+                            { name: "Hydrogen", id: 6, img: "/services-imgs/tech-logos/logo-6.webp" },
+                            { name: "Framework", id: 1, img: "/services-imgs/tech-logos/logo-7.webp" },
+                            { name: "Design", id: 2, img: "/services-imgs/tech-logos/logo-8.webp" },
+                            { name: "Language", id: 3, img: "/services-imgs/tech-logos/logo-9.webp" },
+                            { name: "Animation", id: 4, img: "/services-imgs/tech-logos/logo-10.webp" },
+                            { name: "Backend", id: 5, img: "/services-imgs/tech-logos/logo-11.webp" },
+                            { name: "Hydrogen", id: 6, img: "/services-imgs/tech-logos/logo-12.webp" },
                         ]} />
                     </div>
                 </section>

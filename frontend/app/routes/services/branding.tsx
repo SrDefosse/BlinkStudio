@@ -86,38 +86,36 @@ export default function Branding() {
             ]}
 
             stackTitle="Tools We Use"
-            stack={["Adobe Illustrator", "Figma", "Photoshop", "Cinema 4D", "After Effects"]}
 
             stackImages={[
                 {
                     id: 1,
-                    src: "/images/branding/branding-homie.jpg",
+                    src: "/services-imgs/branding/branding-homie.jpg",
                     alt: "Homie Branding Project",
                 },
                 {
                     id: 2,
-                    src: "/images/branding/branding-studio-lab.png",
+                    src: "/services-imgs/branding/branding-studio-lab.png",
                     alt: "Studio Lab Coat Branding",
                 },
                 {
                     id: 3,
-                    src: "/images/branding/branding-m.jpg",
+                    src: "/services-imgs/branding/branding-m.jpg",
                     alt: "M Branding Logo",
                 },
                 {
                     id: 4,
-                    src: "/images/branding/branding-bpm.jpg",
+                    src: "/services-imgs/branding/branding-bpm.jpg",
                     alt: "BPM Brand Application",
                 },
                 {
                     id: 5,
-                    src: "/images/branding/branding-studio-aop.png",
+                    src: "/services-imgs/branding/branding-studio-aop.png",
                     alt: "Studio AOP Logo",
                 },
             ]}
 
             ctaTitle="Define your legacy"
-            ctaDescription="Create a brand identity that leaves a lasting impression."
         />
     );
 }

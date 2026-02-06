@@ -86,38 +86,36 @@ export default function Ecommerce() {
             ]}
 
             stackTitle="Technologies"
-            stack={["Shopify", "WooCommerce", "Stripe", "Next.js Commerce", "PostgreSQL", "Redis"]}
 
             stackImages={[
                 {
                     id: 1,
-                    src: "/images/ecommerce/ecommerce-furniture.jpg",
+                    src: "/services-imgs/ecommerce/ecommerce-furniture.jpg",
                     alt: "Furniture Store Design",
                 },
                 {
                     id: 2,
-                    src: "/images/ecommerce/ecommerce-mobile-app.jpg",
+                    src: "/services-imgs/ecommerce/ecommerce-mobile-app.jpg",
                     alt: "Mobile Commerce App",
                 },
                 {
                     id: 3,
-                    src: "/images/ecommerce/ecommerce-furniture-app.jpg",
+                    src: "/services-imgs/ecommerce/ecommerce-furniture-app.jpg",
                     alt: "Furniture Shopping App",
                 },
                 {
                     id: 4,
-                    src: "/images/ecommerce/ecommerce-pet-store.png",
+                    src: "/services-imgs/ecommerce/ecommerce-pet-store.png",
                     alt: "Pet Store E-commerce",
                 },
                 {
                     id: 5,
-                    src: "/images/ecommerce/ecommerce-skincare.png",
+                    src: "/services-imgs/ecommerce/ecommerce-skincare.png",
                     alt: "Skincare Product Page",
                 },
             ]}
 
             ctaTitle="Start selling more today"
-            ctaDescription="Build an online store that your customers will love."
         />
     );
 }

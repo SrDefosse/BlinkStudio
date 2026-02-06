@@ -7,8 +7,7 @@ import ShowCase2 from "../components/home/ShowCase2";
 import ContactSection from "../components/home/Contact";
 // import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
-import useSmoothScroll from "../hooks/useSmoothScroll";
-import HomeBackground from "../components/home/HomeBackground";
+import HomeBackground from "../layout/HomeBackground";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -18,7 +17,6 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Home() {
-  useSmoothScroll();
 
   return (
     <HomeBackground>
