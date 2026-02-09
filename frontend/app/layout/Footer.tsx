@@ -166,7 +166,7 @@ function StickyFooter({ className = "" }) {
                 borderColor: `${colors.text.muted}20`
               }}
             >
-              <p>© 2025 Blink Sites. All rights reserved.</p>
+              <p>© 2026 Blink Studio. All rights reserved.</p>
             </div>
           </div>
         </div>

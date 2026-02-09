@@ -3,100 +3,100 @@ import type { Route } from "./+types/contact";
 
 // Define the shape of our form data for type safety
 type ContactFormData = {
-    nombre: string;
-    correo: string;
-    mensaje: string;
-    interests?: string; // Comma separated string or specific format
-    website?: string; // Honeypot
+  nombre: string;
+  correo: string;
+  mensaje: string;
+  interests?: string; // Comma separated string or specific format
+  website?: string; // Honeypot
 };
 
 export async function action({ request }: Route.ActionArgs) {
-    // 1. Origin Check
-    const origin = request.headers.get("Origin");
-    // Allow requests from the main domain and localhost for development
-    const allowedOrigins = [
-        "https://blinkstudio.dev",
-        "https://www.blinkstudio.dev",
-        "http://localhost:5173", // Dev environment
-        "http://localhost:3000",
-    ];
+  // 1. Origin Check
+  const origin = request.headers.get("Origin");
+  // Allow requests from the main domain and localhost for development
+  const allowedOrigins = [
+    "https://blinkstudio.dev",
+    "https://www.blinkstudio.dev",
+    "http://localhost:5173", // Dev environment
+    "http://localhost:3000",
+  ];
 
-    // In development, we might strictly enforce this or leniently allow localhost
-    if (process.env.NODE_ENV === "production" && origin && !allowedOrigins.includes(origin)) {
-        return data({ success: false, error: "Unauthorized origin" }, { status: 403 });
-    }
+  // In development, we might strictly enforce this or leniently allow localhost
+  if (process.env.NODE_ENV === "production" && origin && !allowedOrigins.includes(origin)) {
+    return data({ success: false, error: "Unauthorized origin" }, { status: 403 });
+  }
 
-    const formData = await request.formData();
-    const nombre = formData.get("nombre") as string;
-    const correo = formData.get("correo") as string;
-    const mensaje = formData.get("mensaje") as string;
-    // Interests might come as multiple fields or a joined string. 
-    // If usage is FormData with same name, getAll returns array.
-    const interestsRaw = formData.getAll("interests");
-    const interests = interestsRaw.join(", ");
+  const formData = await request.formData();
+  const nombre = formData.get("nombre") as string;
+  const correo = formData.get("correo") as string;
+  const mensaje = formData.get("mensaje") as string;
+  // Interests might come as multiple fields or a joined string. 
+  // If usage is FormData with same name, getAll returns array.
+  const interestsRaw = formData.getAll("interests");
+  const interests = interestsRaw.join(", ");
 
-    const website = formData.get("website") as string;
+  const website = formData.get("website") as string;
 
-    // 2. Honeypot Check
-    if (website) {
-        // Silently return success to fool bots
-        return data({ success: true, message: "Mensaje enviado correctamente." });
-    }
+  // 2. Honeypot Check
+  if (website) {
+    // Silently return success to fool bots
+    return data({ success: true, message: "Mensaje enviado correctamente." });
+  }
 
-    // 3. Input Sanitization & Strict Validation
+  // 3. Input Sanitization & Strict Validation
 
-    // Helper to strip HTML tags
-    const stripHtml = (str: string) => str ? str.replace(/<[^>]*>?/gm, "") : "";
+  // Helper to strip HTML tags
+  const stripHtml = (str: string) => str ? str.replace(/<[^>]*>?/gm, "") : "";
 
-    const cleanNombre = stripHtml(nombre)?.trim();
-    const cleanCorreo = stripHtml(correo)?.trim();
-    const cleanMensaje = stripHtml(mensaje)?.trim();
-    const cleanInterests = stripHtml(interests)?.trim();
+  const cleanNombre = stripHtml(nombre)?.trim();
+  const cleanCorreo = stripHtml(correo)?.trim();
+  const cleanMensaje = stripHtml(mensaje)?.trim();
+  const cleanInterests = stripHtml(interests)?.trim();
 
-    // Validate lengths
-    if (!cleanNombre || cleanNombre.length < 2 || cleanNombre.length > 100) {
-        return data({ success: false, error: "Name is invalid." }, { status: 400 });
-    }
-    if (!cleanMensaje || cleanMensaje.length < 10 || cleanMensaje.length > 2000) {
-        return data({ success: false, error: "Message must be between 10 and 2000 characters." }, { status: 400 });
-    }
+  // Validate lengths
+  if (!cleanNombre || cleanNombre.length < 2 || cleanNombre.length > 100) {
+    return data({ success: false, error: "Name is invalid." }, { status: 400 });
+  }
+  if (!cleanMensaje || cleanMensaje.length < 10 || cleanMensaje.length > 2000) {
+    return data({ success: false, error: "Message must be between 10 and 2000 characters." }, { status: 400 });
+  }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!cleanCorreo || !emailRegex.test(cleanCorreo) || cleanCorreo.length > 254) {
-        return data({ success: false, error: "Email is invalid." }, { status: 400 });
-    }
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!cleanCorreo || !emailRegex.test(cleanCorreo) || cleanCorreo.length > 254) {
+    return data({ success: false, error: "Email is invalid." }, { status: 400 });
+  }
 
-    // 4. Header Protection
-    const subject = `New contact message from ${cleanNombre} - Blink Studio`;
-    const safeSubject = subject.replace(/[\r\n]/g, " ");
+  // 4. Header Protection
+  const subject = `New contact message from ${cleanNombre} - Blink Studio`;
+  const safeSubject = subject.replace(/[\r\n]/g, " ");
 
-    // 5. Server-Side Execution with Resend (Native Fetch)
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-        console.error("RESEND_API_KEY is missing");
-        return data({ success: false, error: "Server configuration error." }, { status: 500 });
-    }
+  // 5. Server-Side Execution with Resend (Native Fetch)
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.error("RESEND_API_KEY is missing");
+    return data({ success: false, error: "Server configuration error." }, { status: 500 });
+  }
 
-    try {
-        const res = await fetch("https://api.resend.com/emails", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify({
-                from: "Blink Studio <noreply@blinkstudio.dev>", // Ideally this should be a verified domain
-                // If blinkstudio.dev is not verified on Resend yet, they might need to use 'onboarding@resend.dev'
-                // But the user asked to adapt to blinkstudio.dev domain. 
-                // Using a potentially unverified domain might fail if not set up, 
-                // but I must follow instructions. 
-                // Often 'onboarding@resend.dev' works for testing if 'to' is the same as account email.
-                // I will use noreply@blinkstudio.dev as requested adaptation.
-                to: ["blinksitesweb@gmail.com"],
-                reply_to: cleanCorreo,
-                subject: safeSubject,
-                html: `
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        from: "Blink Studio <noreply@blinkstudio.dev>", // Ideally this should be a verified domain
+        // If blinkstudio.dev is not verified on Resend yet, they might need to use 'onboarding@resend.dev'
+        // But the user asked to adapt to blinkstudio.dev domain. 
+        // Using a potentially unverified domain might fail if not set up, 
+        // but I must follow instructions. 
+        // Often 'onboarding@resend.dev' works for testing if 'to' is the same as account email.
+        // I will use noreply@blinkstudio.dev as requested adaptation.
+        to: ["contact@blinkstudio.dev"],
+        reply_to: cleanCorreo,
+        subject: safeSubject,
+        html: `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,20 +175,20 @@ export async function action({ request }: Route.ActionArgs) {
 </body>
 </html>
 `,
-            }),
-        });
+      }),
+    });
 
-        if (!res.ok) {
-            const errorData = await res.json();
-            console.error("Resend API Error:", errorData);
-            throw new Error("Error sending email via Resend");
-        }
-
-
-        return data({ success: true, message: "Message sent successfully." });
-
-    } catch (error) {
-        console.error("Contact form error:", error);
-        return data({ success: false, error: "Error sending message. Please try again later." }, { status: 500 });
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("Resend API Error:", errorData);
+      throw new Error("Error sending email via Resend");
     }
+
+
+    return data({ success: true, message: "Message sent successfully." });
+
+  } catch (error) {
+    console.error("Contact form error:", error);
+    return data({ success: false, error: "Error sending message. Please try again later." }, { status: 500 });
+  }
 }
