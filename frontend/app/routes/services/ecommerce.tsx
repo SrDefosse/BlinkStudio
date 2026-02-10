@@ -2,11 +2,14 @@
 import ServiceLayout from "../../components/services/ServiceLayout";
 import type { Route } from "./+types/ecommerce";
 
+import { getMetaTags } from "../../utils/seo";
+
 export function meta({ }: Route.MetaArgs) {
-    return [
-        { title: "Ecommerce Solutions | Blink Studio" },
-        { name: "description", content: "Drive sales with seamless online shopping experiences." },
-    ];
+    return getMetaTags({
+        title: "Ecommerce Solutions | Sell More Online",
+        description: "Boost your online sales with a seamless, secure, and beautiful e-commerce experience tailored to your customers.",
+        image: "/home-imgs/values/teamwork.webp",
+    });
 }
 
 export default function Ecommerce() {

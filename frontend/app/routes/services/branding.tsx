@@ -2,11 +2,14 @@
 import ServiceLayout from "../../components/services/ServiceLayout";
 import type { Route } from "./+types/branding";
 
+import { getMetaTags } from "../../utils/seo";
+
 export function meta({ }: Route.MetaArgs) {
-    return [
-        { title: "Strategic Branding | Blink Studio" },
-        { name: "description", content: "Build a brand that resonates and endures." },
-    ];
+    return getMetaTags({
+        title: "Strategic Branding & Identity",
+        description: "Define your legacy with a cohesive brand identity that resonates with your audience and stands the test of time.",
+        image: "/home-imgs/values/innovation.webp",
+    });
 }
 
 export default function Branding() {

@@ -256,7 +256,6 @@ const ContactComponent = ({ showHeader = true }: ContactComponentProps) => {
                   {[
                     { value: 'web-development', label: 'Web Development' },
                     { value: 'branding', label: 'Branding & Identity' },
-                    { value: 'ai-content', label: 'AI Driven Content Creation' },
                     { value: 'chatbots', label: 'Chatbots' },
                     { value: 'automation', label: 'Automation Systems' }
                   ].map((option) => (

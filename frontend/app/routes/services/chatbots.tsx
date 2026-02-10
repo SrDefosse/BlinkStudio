@@ -2,11 +2,14 @@
 import ServiceLayout from "../../components/services/ServiceLayout";
 import type { Route } from "./+types/chatbots";
 
+import { getMetaTags } from "../../utils/seo";
+
 export function meta({ }: Route.MetaArgs) {
-    return [
-        { title: "AI Chatbots | Blink Studio" },
-        { name: "description", content: "24/7 customer support and lead generation powered by AI." },
-    ];
+    return getMetaTags({
+        title: "AI Chatbots & Business Automation",
+        description: "Automate your customer support and lead generation with our custom-trained AI chatbot solutions.",
+        image: "/services-imgs/chatbots/blink-studio-logo.jpg",
+    });
 }
 
 export default function Chatbots() {

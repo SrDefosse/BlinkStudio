@@ -2,11 +2,14 @@ import { type MetaFunction } from "react-router";
 import HomeBackground from "../layout/HomeBackground";
 import { DraggableContainer, GridBody, GridItem } from "../components/portfolio/DraggableContainer";
 
+import { getMetaTags } from "../utils/seo";
+
 export const meta: MetaFunction = () => {
-    return [
-        { title: "Portfolio | Blink Studio" },
-        { name: "description", content: "Our recent work and projects." },
-    ];
+    return getMetaTags({
+        title: "Selected Projects | Portfolio",
+        description: "Explore our latest projects in web design, branding, and digital transformation.",
+        image: "/process-imgs/process-2.png",
+    });
 };
 
 const colors = {

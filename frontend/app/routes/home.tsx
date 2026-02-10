@@ -9,11 +9,14 @@ import ContactSection from "../components/home/Contact";
 import Footer from "../layout/Footer";
 import HomeBackground from "../layout/HomeBackground";
 
+import { getMetaTags } from "../utils/seo";
+
 export function meta({ }: Route.MetaArgs) {
-  return [
-    { title: "Blink Studio" },
-    { name: "description", content: "Digital Agency based in Mexico" },
-  ];
+  return getMetaTags({
+    title: "Blink Studio | Creative Digital Agency in Mexico",
+    description: "Elevating brands through innovative digital solutions. Specialist in Web Development, Branding, and AI Chatbots.",
+    image: "/home-imgs/values/communication.webp",
+  });
 }
 
 export default function Home() {

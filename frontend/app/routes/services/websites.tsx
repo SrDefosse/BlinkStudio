@@ -2,11 +2,14 @@
 import ServiceLayout from "../../components/services/ServiceLayout";
 import type { Route } from "./+types/websites";
 
+import { getMetaTags } from "../../utils/seo";
+
 export function meta({ }: Route.MetaArgs) {
-    return [
-        { title: "Custom Websites | Blink Studio" },
-        { name: "description", content: "High-performance, stunning websites tailored to your brand." },
-    ];
+    return getMetaTags({
+        title: "Custom Website Development",
+        description: "We craft high-performance, mobile-first websites that blend aesthetics with technical excellence.",
+        image: "/process-imgs/process-1.jpg",
+    });
 }
 
 export default function Websites() {
