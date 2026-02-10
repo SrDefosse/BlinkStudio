@@ -5,7 +5,6 @@ import Values from "../components/home/Values";
 import Process from "../components/home/Process";
 import ShowCase2 from "../components/home/ShowCase2";
 import ContactSection from "../components/home/Contact";
-// import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
 import HomeBackground from "../layout/HomeBackground";
 
