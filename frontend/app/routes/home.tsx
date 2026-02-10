@@ -15,7 +15,7 @@ export function meta({ }: Route.MetaArgs) {
   return getMetaTags({
     title: "Blink Studio | Creative Digital Agency in Mexico",
     description: "Elevating brands through innovative digital solutions. Specialist in Web Development, Branding, and AI Chatbots.",
-    image: "/home-imgs/values/communication.webp",
+    image: "/process-imgs/process-1.jpg",
   });
 }
 
