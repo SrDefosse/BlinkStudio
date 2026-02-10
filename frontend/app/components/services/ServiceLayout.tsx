@@ -3,9 +3,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router";
 import { FaArrowRight } from "react-icons/fa";
-import VerticalImageStack from "./VerticalImageStack";
 import { LogoCarousel } from "./LogoCarousel";
 import HomeBackground from "../../layout/HomeBackground";
+import ImageHaloCarousel from "./ImageHaloCarousel";
 
 interface ServiceLayoutProps {
     title: string;
@@ -92,7 +92,7 @@ export default function ServiceLayout({
                 {/* Vertical Image Stack */}
                 {stackImages && stackImages.length > 0 && (
                     <section className="py-20">
-                        <VerticalImageStack images={stackImages} />
+                        <ImageHaloCarousel images={stackImages} />
                     </section>
                 )}
 
