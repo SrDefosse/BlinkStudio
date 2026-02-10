@@ -304,7 +304,7 @@ export default function Navbar({ className }: NavbarProps) {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-3 rounded-lg bg-[#2a2e26]/80 backdrop-blur-md border border-[#544237]/30 shadow-2xl"
+          className="p-3 rounded-lg bg-[#2a2e26]/10 backdrop-blur-md border border-[#544237]/30 shadow-2xl"
           aria-label="Toggle menu"
         >
           <svg

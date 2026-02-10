@@ -8,7 +8,7 @@ const LOGOS = [
   { src: "home-imgs/hero/logos/mit_logo.webp", alt: "MIT Consultores" },
   { src: "home-imgs/hero/logos/sinergia_logo.webp", alt: "Sinergia Telecomunicaciones" },
   { src: "home-imgs/hero/logos/fer_tovar_logo.webp", alt: "Fer Tovar" },
-  { src: "home-imgs/hero/logos/entheo_logo.webp", alt: "Entheo" },
+  { src: "home-imgs/hero/logos/malpe_logo.webp", alt: "Malpe" },
   { src: "home-imgs/hero/logos/8esencias_logo.webp", alt: "8 Esencias" },
 ];
 
